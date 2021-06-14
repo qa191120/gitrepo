@@ -21,7 +21,7 @@ class DemoApplicationTests {
 	@Test
 	public void test_test1() {
 		int x = 1;
-		assert x == 1;
+		assert x == 12;
 	}
 
 	@Test
