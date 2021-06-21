@@ -12,15 +12,10 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"test_coupon_get_3_results_after_get\", function(){\r",
-							"    pm.sendRequest({\r",
-							"        url: 'http://localhost:8080/coupon',\r",
-							"        method: 'GET'\r",
-							"    }, function(err, response){\r",
-							"        pm.expect(response.code).to.equal(200);\r",
-							"        pm.expect(response.json().length).to.equal(3)\r",
+							"pm.test(\"status code of post is 200 and 3 results\", function(){\r",
+							"        pm.expect(pm.response.code).to.equal(200);\r",
+							"        pm.expect(pm.response.json().length).to.equal(3)\r",
 							"    });\r",
-							"});\r",
 							""
 						],
 						"type": "text/javascript"
@@ -45,27 +40,15 @@
 			"response": []
 		},
 		{
-			"name": "test_post",
+			"name": "test_post1",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"\r",
 							"pm.test(\"status code of post is 200\", function(){\r",
 							"    pm.expect(pm.response.code).to.equal(200);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"test_coupon_get_results_after_post\", function(){\r",
-							"    pm.sendRequest({\r",
-							"        url: 'http://localhost:8080/coupon',\r",
-							"        method: 'GET'\r",
-							"    }, function(err, response){\r",
-							"        pm.expect(response.code).to.equal(200);\r",
-							"        pm.expect(response.json().length).to.equal(4)\r",
-							"    });\r",
-							"});\r",
-							""
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -98,7 +81,41 @@
 			"response": []
 		},
 		{
-			"name": "test_put",
+			"name": "test_post2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get after post is 200 and 4 items\", function(){\r",
+							"        pm.expect(pm.response.code).to.equal(200);\r",
+							"        pm.expect(pm.response.json().length).to.equal(4)\r",
+							"    });\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/coupon",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"coupon"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test_put1",
 			"event": [
 				{
 					"listen": "test",
@@ -106,16 +123,6 @@
 						"exec": [
 							"pm.test(\"status code of put is 200\", function(){\r",
 							"    pm.expect(pm.response.code).to.equal(200);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"test_coupon_get_results\", function(){\r",
-							"    pm.sendRequest({\r",
-							"        url: 'http://localhost:8080/coupon/4',\r",
-							"        method: 'GET'\r",
-							"    }, function(err, response){\r",
-							"        pm.expect(response.code).to.equal(200);\r",
-							"        pm.expect(response.json().title).to.equal(\"battleship\")\r",
-							"    });\r",
 							"});\r",
 							""
 						],
@@ -151,7 +158,43 @@
 			"response": []
 		},
 		{
-			"name": "test_delete",
+			"name": "test_put2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status code of get is 200 and changed by put\", function(){\r",
+							"        pm.expect(pm.response.code).to.equal(200);\r",
+							"        pm.expect(pm.response.json().title).to.equal(\"battleship\")\r",
+							"    });\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/coupon/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"coupon",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test_delete1",
 			"event": [
 				{
 					"listen": "test",
@@ -160,16 +203,7 @@
 							"pm.test(\"status code of delete is 200\", function(){\r",
 							"    pm.expect(pm.response.code).to.equal(200);\r",
 							"});\r",
-							"\r",
-							"pm.test(\"test_coupon_get_3_result_after_delete\", function(){\r",
-							"    pm.sendRequest({\r",
-							"        url: 'http://localhost:8080/coupon',\r",
-							"        method: 'GET'\r",
-							"    }, function(err, response){\r",
-							"        pm.expect(response.code).to.equal(200);\r",
-							"        pm.expect(response.json().length).to.equal(3)\r",
-							"    });\r",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -188,6 +222,40 @@
 					"path": [
 						"coupon",
 						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test_delete2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status code of get is 200 and items after delete are 3\", function(){\r",
+							"        pm.expect(pm.response.code).to.equal(200);\r",
+							"        pm.expect(pm.response.json().length).to.equal(3)\r",
+							"    });\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/coupon",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"coupon"
 					]
 				}
 			},
