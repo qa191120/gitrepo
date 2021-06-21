@@ -65,7 +65,7 @@ public class CouponController {
         while(it.hasNext()) {
             Coupon i = it.next();
             if(i.getId() == id) {
-               // it.remove();
+                it.remove();
                 return "Coupon deleted";
             }
         }
